@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Install Packages
+        run: npm ci
+      - name: Lint
+        run: npm run lint && npm run format:check
+      - name: Build
+        run: npm run build
+      - name: Test
+        if: ${{ !contains(github.event.pull_request.title, '[skip test]') }}
+        run: npm run integration:headless
