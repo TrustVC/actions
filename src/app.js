@@ -1,5 +1,5 @@
 (function () {
-  const WHITELISTS = ["tradetrust.io"];
+  const WHITELISTS = ["tradetrust.io", "trustvc.io", "opencerts.io"];
   const app = document.getElementById("app");
 
   function getDomain(hostname) {
